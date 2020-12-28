@@ -1,0 +1,10 @@
+1|Mow lawn|12/04/2020|False|False
+2|Call Dad|11/26/2020|True|False
+3|TE Homework|11/27/2020|True|True
+4|Optometrist|12/26/2021|False|True
+5|World domination|01/01/2025|True|False
+6|Take out trash|11/30/2020|False|False
+7|Wash dog|01/01/2021|False|False
+8|Fix fence|01/04/2019|True|False
+9|Shopping|12/16/2018|False|True
+10|Hoard supplies|03/12/2020|True|True

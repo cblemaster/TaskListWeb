@@ -1,0 +1,26 @@
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.exe
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.deps.json
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.runtimeconfig.json
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.runtimeconfig.dev.json
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.dll
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.pdb
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.csprojAssemblyReference.cache
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.AssemblyInfoInputs.cache
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.AssemblyInfo.cs
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.csproj.CoreCompileInputs.cache
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.dll
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.pdb
+C:\Users\Student\Desktop\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.genruntimeconfig.cache
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.exe
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.deps.json
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.runtimeconfig.json
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.runtimeconfig.dev.json
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.dll
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\bin\Debug\netcoreapp3.1\VendingMachineCLI.pdb
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.csprojAssemblyReference.cache
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.AssemblyInfoInputs.cache
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.AssemblyInfo.cs
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.csproj.CoreCompileInputs.cache
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.dll
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.pdb
+C:\Users\Brian LeMaster\source\repos\04 Projects\VendingMachineCLI\VendingMachineCLI\obj\Debug\netcoreapp3.1\VendingMachineCLI.genruntimeconfig.cache
