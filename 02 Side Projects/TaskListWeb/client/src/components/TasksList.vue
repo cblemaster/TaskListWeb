@@ -27,7 +27,7 @@ import taskService from "../services/TaskService.js";
 export default {
   data() {
     return {
-      isLoading: true,
+      isLoading: false,
       errorMsg: "",
       selectedTaskId: Number
     };

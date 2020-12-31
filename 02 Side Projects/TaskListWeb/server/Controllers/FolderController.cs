@@ -49,6 +49,36 @@ namespace TaskListWeb.Controllers
             }
         }
 
+        // https://localhost:44312/folder/desc
+        [HttpGet("desc")]
+        public IActionResult ListSortDesc()
+        {
+            List<Folder> folders = folderDAO.ListSortDesc();
+            if (folders == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(folders);
+            }
+        }
+
+        // https://localhost:44312/folder/asc
+        [HttpGet("asc")]
+        public IActionResult ListSortAsc()
+        {
+            List<Folder> folders = folderDAO.ListSortAsc();
+            if (folders == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(folders);
+            }
+        }
+
         // https://localhost:44312/folder
         [HttpPost]
         public IActionResult Create(Folder folderToCreate)

@@ -20,5 +20,17 @@ export default {
   },
   getTasksRecurring() {
     return http.get(`/task/recurring`);
+  },
+  createFolder(folderToCreate) {
+    return http.post(`/folder`, folderToCreate);
+  },
+  getFoldersSortAsc() {
+    return http.get(`/folder/asc`);
+  },
+  getFoldersSortDesc() {
+    return http.get(`/folder/desc`);
+  },
+  deleteFolder(folderId) {
+    return http.delete(`/folder/${folderId}`);
   }
 }

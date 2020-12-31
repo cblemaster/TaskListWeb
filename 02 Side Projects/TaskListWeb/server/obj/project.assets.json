@@ -459,11 +459,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Brian LeMaster\\source\\repos\\04 Projects\\02 Side Projects\\TaskListWeb\\server\\TaskListWeb.csproj",
+      "projectUniqueName": "C:\\Users\\Brian LeMaster\\source\\repos\\projects\\02 Side Projects\\TaskListWeb\\server\\TaskListWeb.csproj",
       "projectName": "TaskListWeb",
-      "projectPath": "C:\\Users\\Brian LeMaster\\source\\repos\\04 Projects\\02 Side Projects\\TaskListWeb\\server\\TaskListWeb.csproj",
+      "projectPath": "C:\\Users\\Brian LeMaster\\source\\repos\\projects\\02 Side Projects\\TaskListWeb\\server\\TaskListWeb.csproj",
       "packagesPath": "C:\\Users\\Brian LeMaster\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Brian LeMaster\\source\\repos\\04 Projects\\02 Side Projects\\TaskListWeb\\server\\obj\\",
+      "outputPath": "C:\\Users\\Brian LeMaster\\source\\repos\\projects\\02 Side Projects\\TaskListWeb\\server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Brian LeMaster\\AppData\\Roaming\\NuGet\\NuGet.Config",

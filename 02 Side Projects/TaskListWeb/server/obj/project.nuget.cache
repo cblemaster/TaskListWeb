@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P2nEUkhxpaj+Atd+6xbvChs3EGWyxjCAv5MdbM4OYzx8MV//I8Ewc9+3uKaSbRaw3OEn1SClc+yqw57YetgTPA==",
+  "dgSpecHash": "+u8NBOsO9WsfJnBEd7BiZ1J4RWdgFRz+mTX4x6BQz1DSvssJVskqJi2JR5K4VikWFd946GL5mIHwj/+0hcgA+Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Brian LeMaster\\source\\repos\\04 Projects\\02 Side Projects\\TaskListWeb\\server\\TaskListWeb.csproj",
+  "projectFilePath": "C:\\Users\\Brian LeMaster\\source\\repos\\projects\\02 Side Projects\\TaskListWeb\\server\\TaskListWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Brian LeMaster\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Brian LeMaster\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

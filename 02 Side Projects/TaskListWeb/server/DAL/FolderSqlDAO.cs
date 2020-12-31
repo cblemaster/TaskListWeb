@@ -165,5 +165,71 @@ namespace TaskListWeb.DAL
 
             return f;
         }
+
+        public List<Folder> ListSortAsc()
+        {
+            List<Folder> folders = new List<Folder>();
+            Folder f = null;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT folder_id, folder_name, created_date " +
+                                                "FROM folder " +
+                                                "ORDER BY folder_name ASC", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.HasRows && reader.Read())
+                    {
+                        f = ConvertReaderToFolder(reader);
+                        folders.Add(f);
+                    }
+                }
+            }
+
+            catch (SqlException e)
+            {
+                throw;
+            }
+
+            return folders;
+        }
+
+        public List<Folder> ListSortDesc()
+        {
+            List<Folder> folders = new List<Folder>();
+            Folder f = null;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT folder_id, folder_name, created_date " +
+                                                "FROM folder " +
+                                                "ORDER BY folder_name DESC", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.HasRows && reader.Read())
+                    {
+                        f = ConvertReaderToFolder(reader);
+                        folders.Add(f);
+                    }
+                }
+            }
+
+            catch (SqlException e)
+            {
+                throw;
+            }
+
+            return folders;
+        }
     }
 }
