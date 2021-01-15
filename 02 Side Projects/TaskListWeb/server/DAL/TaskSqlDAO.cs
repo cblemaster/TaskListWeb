@@ -93,7 +93,8 @@ namespace TaskListWeb.DAL
                     SqlCommand cmd = new SqlCommand("SELECT task_id, task_name, task.created_date AS created_date, " +
                                                     "due_date, reminder, is_complete, " +
                                                     "is_important, " +
-                                                    "folder_name, recurrence_name " +
+                                                    "folder_name, recurrence_name, " +
+                                                    "task.folder_id AS folder_id, task.recurrence_id AS recurrence_id " +
                                                     "FROM task " +
                                                     "INNER JOIN folder ON folder.folder_id = task.folder_id " +
                                                     "INNER JOIN recurrence ON recurrence.recurrence_id = task.recurrence_id " +
@@ -130,7 +131,8 @@ namespace TaskListWeb.DAL
                     SqlCommand cmd = new SqlCommand("SELECT task_id, task_name, task.created_date AS created_date, " +
                                                     "due_date, reminder, is_complete, " +
                                                     "is_important, " +
-                                                    "folder_name, recurrence_name " +
+                                                    "folder_name, recurrence_name, " +
+                                                    "task.folder_id AS folder_id, task.recurrence_id AS recurrence_id " +
                                                     "FROM task " +
                                                     "INNER JOIN folder ON folder.folder_id = task.folder_id " +
                                                     "INNER JOIN recurrence ON recurrence.recurrence_id = task.recurrence_id ", conn);
@@ -167,7 +169,8 @@ namespace TaskListWeb.DAL
                     SqlCommand cmd = new SqlCommand("SELECT task_id, task_name, task.created_date AS created_date, " +
                                                     "due_date, reminder, is_complete, " +
                                                     "is_important, " +
-                                                    "folder_name, recurrence_name " +
+                                                    "folder_name, recurrence_name, " +
+                                                    "task.folder_id AS folder_id, task.recurrence_id AS recurrence_id " +
                                                     "FROM task " +
                                                     "INNER JOIN folder ON folder.folder_id = task.folder_id " +
                                                     "INNER JOIN recurrence ON recurrence.recurrence_id = task.recurrence_id " +
@@ -238,7 +241,9 @@ namespace TaskListWeb.DAL
                 IsComplete = Convert.ToBoolean(reader["is_complete"]),
                 IsImportant = Convert.ToBoolean(reader["is_important"]),
                 RecurrenceName = Convert.ToString(reader["recurrence_name"]),
-                FolderName = Convert.ToString(reader["folder_name"])
+                FolderName = Convert.ToString(reader["folder_name"]),
+                FolderId = Convert.ToInt32(reader["folder_id"]),
+                RecurrenceId = Convert.ToInt32(reader["recurrence_id"])
             };
 
             return t;
@@ -258,7 +263,8 @@ namespace TaskListWeb.DAL
                     SqlCommand cmd = new SqlCommand("SELECT task_id, task_name, task.created_date AS created_date, " +
                                                     "due_date, reminder, task.recurrence_id AS recurrence_id, is_complete, " +
                                                     "is_important, task.folder_id AS folder_id, " +
-                                                    "folder_name, recurrence_name " +
+                                                    "folder_name, recurrence_name, " +
+                                                    "task.folder_id AS folder_id, task.recurrence_id AS recurrence_id " +
                                                     "FROM task " +
                                                     "INNER JOIN folder ON folder.folder_id = task.folder_id " +
                                                     "INNER JOIN recurrence ON recurrence.recurrence_id = task.recurrence_id " +
@@ -296,7 +302,8 @@ namespace TaskListWeb.DAL
                     SqlCommand cmd = new SqlCommand("SELECT task_id, task_name, task.created_date AS created_date, " +
                                                     "due_date, reminder, task.recurrence_id AS recurrence_id, is_complete, " +
                                                     "is_important, task.folder_id AS folder_id, " +
-                                                    "folder_name, recurrence_name " +
+                                                    "folder_name, recurrence_name, " +
+                                                    "task.folder_id AS folder_id, task.recurrence_id AS recurrence_id " +
                                                     "FROM task " +
                                                     "INNER JOIN folder ON folder.folder_id = task.folder_id " +
                                                     "INNER JOIN recurrence ON recurrence.recurrence_id = task.recurrence_id " +

@@ -7,30 +7,47 @@ const http = axios.create({
 export default {
 
   getFolders() {
-    return http.get(`/folder`);  
+    return http.get('/folder');
   },
-  getTasks(folderId) {
-    return http.get(`/task/folder/${folderId}`);
+
+  getTask(taskID) {
+    return http.get(`/task/${taskID}`);
   },
-  getTask(taskId) {
-    return http.get(`/task/${taskId}`);
+
+  addTask(task) {
+    return http.post('/task', task);
   },
+
+  updateTask(task) {
+    return http.put(`/task/${task.taskId}`, task);
+  },
+
+  deleteTask(taskID) {
+    return http.delete(`/task/${taskID}`);
+  },
+
+  addFolder(folder) {
+    return http.post('/folder', folder);
+  },
+
+  deleteFolder(folderID) {
+    return http.delete(`/folder/${folderID}`);
+  },
+
+  updateFolder(folder) {
+    return http.put(`/folder/${folder.folderId}`, folder);
+  },
+
+  getTasksByFolder(folderID) {
+    return http.get(`/task/folder/${folderID}`);
+  },
+
   getTasksImportant() {
     return http.get(`/task/important`);
   },
+
   getTasksRecurring() {
     return http.get(`/task/recurring`);
-  },
-  createFolder(folderToCreate) {
-    return http.post(`/folder`, folderToCreate);
-  },
-  getFoldersSortAsc() {
-    return http.get(`/folder/asc`);
-  },
-  getFoldersSortDesc() {
-    return http.get(`/folder/desc`);
-  },
-  deleteFolder(folderId) {
-    return http.delete(`/folder/${folderId}`);
   }
+
 }

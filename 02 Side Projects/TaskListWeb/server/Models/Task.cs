@@ -31,5 +31,11 @@ namespace TaskListWeb.Models
         [Required]
         [MaxLength(10, ErrorMessage = "Max length for recurrence is 10 characters.")]
         public string RecurrenceName { get; set; }
+
+        [Required]
+        public int FolderId { get; set; }
+
+        [Required]
+        public int RecurrenceId { get; set; }
     }
 }

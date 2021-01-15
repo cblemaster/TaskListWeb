@@ -1,6 +1,6 @@
 <template>
   <div id="sideNav">
-    <p>My Task Folders</p>
+    <h1>Task Folders</h1>
     <div class="folders">
       <div class="status-message error" v-show="errorMsg !== ''">
         {{ errorMsg }}
@@ -8,70 +8,58 @@
       <div class="loading" v-if="isLoading">
         <img src="../assets/ping_pong_loader.gif" />
       </div>
-      <button type="button" name="sortFoldersAsc" v-on:click="sortFoldersAsc()">
-        Sort A-Z
-      </button>
-      <button
-        type="button"
-        name="sortFoldersDesc"
-        v-on:click="sortFoldersDesc()"
-      >
-        Sort Z-A
-      </button>
-      <p
+      <router-link
+        :to="{ name: 'Folder', params: { id: folder.folderId } }"
+        class="folder"
         v-for="folder in this.$store.state.folders"
         v-bind:key="folder.folderId"
+        v-else
+        tag="div"
       >
-        <a href="#" v-on:click="setSelectedFolderId(folder.folderId)">{{
-          folder.folderName
-        }}</a>
-        &nbsp;<button v-if="selectedFolderId === folder.folderId">
-          Rename
-        </button>
-        <button
-          type="button"
-          name="deleteFolder"
-          v-if="selectedFolderId === folder.folderId"
-          v-on:click.prevent="deleteFolder(folder.folderId, folder.folderName)"
-        >
-          Delete
-        </button>
-      </p>
+        {{ folder.folderName }}
+      </router-link>
       <button
-        type="button"
-        name="addFolder"
-        v-if="!isAdding"
-        v-on:click="showAddFolderForm()"
+        class="btn addFolder"
+        v-if="!isLoading && !showAddFolder"
+        v-on:click="showAddFolder = !showAddFolder"
       >
-        Add folder
+        Add Folder
       </button>
-      <form v-on:submit.prevent="submitAddFolderForm()" v-if="isAdding">
-        <label for="folderName">Folder Name:</label>
+      <form v-if="showAddFolder">
+        Folder Name:
         <input
           type="text"
-          autocomplete="off"
-          v-model="folderToAdd.folderName"
+          class="form-control"
+          v-model="newFolder.folderName"
         />
-        <button type="submit">Submit</button>
-        <button type="cancel" v-on:click.prevent="cancelForm()">Cancel</button>
+        Background Color:
+        <input
+          type="text"
+          class="form-control"
+          v-model="newFolder.backgroundColor"
+        />
+        <button class="btn btn-submit" v-on:click="saveNewFolder">Save</button>
+        <button class="btn btn-cancel" v-on:click="resetAddFolder">
+          Cancel
+        </button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import taskService from "../services/TaskService.js";
+import taskService from "../services/TaskService";
 
 export default {
   data() {
     return {
       isLoading: true,
-      errorMsg: "",
-      selectedFolderId: Number,
-      isAdding: false,
-      folderToAdd: {
+      showAddFolder: false,
+      newFolder: {
         folderName: "",
+        backgroundColor: this.randomBackgroundColor(),
       },
+      errorMsg: "",
     };
   },
   created() {
@@ -82,124 +70,72 @@ export default {
       taskService.getFolders().then((response) => {
         this.$store.commit("SET_FOLDERS", response.data);
         this.isLoading = false;
+
+        if (
+          this.$route.name == "Home" &&
+          response.status === 200 &&
+          response.data.length > 0
+        ) {
+          this.$router.push(`/folder/${response.data[0].folderId}`);
+        }
       });
     },
-    sortFoldersAsc() {
-      this.selectedFolderId = null;
-      taskService.getFoldersSortAsc().then((response) => {
-        this.$store.commit("SET_FOLDERS", response.data);
-      });
-    },
-    sortFoldersDesc() {
-      this.selectedFolderId = null;
-      taskService.getFoldersSortDesc().then((response) => {
-        this.$store.commit("SET_FOLDERS", response.data);
-      });
-    },
-    setSelectedFolderId(id) {
-      this.selectedFolderId = id;
-      if (id === 2) {
-        // selected folder = recurring
-        taskService.getTasksRecurring().then((response) => {
-          this.$store.commit("SET_TASKS", response.data);
-        });
-      } else if (id === 3) {
-        // selected folder = important
-        taskService.getTasksImportant().then((response) => {
-          this.$store.commit("SET_TASKS", response.data);
-        });
-      } else {
-        taskService.getTasks(this.selectedFolderId).then((response) => {
-          this.$store.commit("SET_TASKS", response.data);
-        });
-      }
-    },
-    showAddFolderForm() {
-      this.isAdding = true;
-    },
-    cancelForm() {
-      this.folderToAdd.folderName = "";
-      this.isAdding = false;
-    },
-    submitAddFolderForm() {
-      // handle error if new folder name is blank or null
-      if (
-        this.folderToAdd.folderName === "" ||
-        this.folderToAdd.folderName === null
-      ) {
-        alert("Folder name cannot be blank!");
-        return;
-      }
-      // handle error if new folder name exceeds max length
-      else if (this.folderToAdd.folderName.length > 50) {
-        alert("Max length for folder name is 50 characters!");
-        this.folderToAdd.folderName = "";
-        return;
-      }
-      // handle error if new folder name already exists
-      else {
-        this.$store.state.folders.forEach((folder) => {
-          if (folder.folderName === this.folderToAdd.folderName) {
-            alert("Folder name already exists!");
-            this.folderToAdd.folderName = "";
-            return;
-          }
-        });
-      }
+    saveNewFolder() {
+      alert("begin save new folder");
+      this.isLoading = true; //show the ping pong
       taskService
-        .createFolder(this.folderToAdd)
+        .addFolder(this.newFolder)
         .then((response) => {
           if (response.status === 201) {
-            location.reload();
+            //refresh the list of all of the folders
+            this.retrieveFolders();
+            //stop showing the form
+            //reset the new folder back to blank
+            this.resetAddFolder();
+            // this.isLoading = false;
           }
         })
-        .catch(() => {
-          alert("Error adding new folder...");
-        });
-    },
-    deleteFolder(id, name) {
-      // Tasks, Important, and Recurring folders cannot be deleted
-      if (id === 1 || id === 2 || id === 3) {
-        alert("This folder cannot be deleted!");
-        id = 0;
-        return;
-      }
-      // Folders that contain tasks cannot be deleted
-      else {
-        this.$store.state.tasks.forEach((task) => {
-          if (task.folderName === name) {
-            alert("This folder contains tasks and cannot be deleted!");
-            id = 0;
-            return;
+        .catch((error) => {
+          if (error.response) {
+            this.errorMsg =
+              "Error creating folder. Response from server was " +
+              error.response.statusText +
+              ".";
+          } else if (error.request) {
+            this.errorMsg = "Error creating folder. Could not reach server.";
+          } else {
+            this.errorMsg =
+              "Error creating new folder. Request could not be created.";
           }
+          // this.isLoading = false;
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
-      }
-      if (id != 0) {
-        if (
-          confirm(
-            "Are you sure you want to delete this folder? This action cannot be undone."
-          )
-        ) {
-          taskService
-            .deleteFolder(id)
-            .then((response) => {
-              if (response.status === 204) {
-                alert("Folder deleted successfully!");
-                location.reload();
-              }
-            })
-            .catch(() => {
-              alert("Error deleting folder...");
-            });
-        }
-      }
+
+      alert("at the end of save new folder");
+    },
+    resetAddFolder() {
+      this.newFolder = {
+        folderName: "",
+        backgroundColor: this.randomBackgroundColor(),
+      };
+      this.showAddFolder = false;
+    },
+    randomBackgroundColor() {
+      return "#" + this.generateHexCode();
+    },
+    generateHexCode() {
+      var bg = Math.floor(Math.random() * 16777215).toString(16);
+      if (bg.length !== 6) bg = this.generateHexCode();
+      return bg;
     },
   },
 };
 </script>
 
 <style scoped>
-/* div#sideNav {
+div#sideNav {
   height: 100%;
   width: 20%;
   position: fixed;
@@ -222,8 +158,43 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
-
+.folder {
+  color: #f7fafc;
+  background-color: blue;
+  border-radius: 10px;
+  padding: 40px;
+  flex: 1;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 60%;
+}
+.addFolder {
+  color: #f7fafc;
+  border-radius: 10px;
+  background-color: #28a745;
+  font-size: 16px;
+  width: 60%;
+  margin: 10px;
+  padding: 20px;
+  cursor: pointer;
+}
+.form-control {
+  margin-bottom: 10px;
+}
+.btn {
+  margin-bottom: 35px;
+}
 .loading {
   flex: 3;
-} */
+}
+.folder:hover:not(.router-link-active),
+.addFolder:hover {
+  font-weight: bold;
+}
+.router-link-active {
+  font-weight: bold;
+  border: solid blue 5px;
+  background-color: green;
+}
 </style>

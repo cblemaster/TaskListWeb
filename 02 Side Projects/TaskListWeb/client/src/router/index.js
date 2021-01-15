@@ -1,10 +1,10 @@
-/* import Vue from 'vue'
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Board from '../views/Board.vue'
-import Card from '../views/Card.vue'
-import AddCard from '../views/AddCard.vue'
-import EditCard from '../views/EditCard.vue'
+import Folder from '../views/Folder.vue'
+import Task from '../views/Task.vue'
+import AddTask from '../views/AddTask.vue'
+import EditTask from '../views/EditTask.vue'
 
 Vue.use(VueRouter)
 
@@ -15,25 +15,26 @@ const routes = [
     component: Home
   },
   {
-    path: '/board/:id',
-    name: 'Board',
-    component: Board
+    path: '/folder/:id',
+    name: 'Folder',
+    component: Folder
   },
   {
-    path: '/board/:boardID/card/:cardID',
-    name: 'Card',
-    component: Card
+    path: '/folder/:folderID/task/:taskID',
+    name: 'Task',
+    component: Task
   },
   {
-    path: '/board/:boardID/card/create',
-    name: 'AddCard',
-    component: AddCard
+    path: '/folder/:folderID/task/create',
+    name: 'AddTask',
+    component: AddTask
   },
   {
-    path: '/board/:boardID/card/:cardID/edit',
-    name: 'EditCard',
-    component: EditCard
+    path: '/folder/:folderID/task/:taskID/edit',
+    name: 'EditTask',
+    component: EditTask
   }
+  // May need to add a route (and view, and component) for renaming (editing) folder
 ]
 
 const router = new VueRouter({
@@ -43,4 +44,3 @@ const router = new VueRouter({
 })
 
 export default router
- */
