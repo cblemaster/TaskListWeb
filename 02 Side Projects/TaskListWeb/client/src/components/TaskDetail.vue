@@ -5,16 +5,13 @@
     </div>
     <div v-else>
       <h1>{{ task.taskName }}</h1>
-      <p>Due Date: {{ task.dueDate }}</p>
-      <p>Reminder: {{ task.reminder }}</p>
-      <p>Is Complete?: {{ task.isComplete }}</p>
-      <p>Is Important?: {{ task.isImportant }}</p>
-      <p>Recurrence Name: {{ task.recurrenceName }}</p>
-      <p>Task Id: {{ task.taskId }}</p>
-      <p>Created Date: {{ task.createdDate }}</p>
-      <p>Folder Name: {{ task.folderName }}</p>
-      <p>Folder Id: {{ task.folderId }}</p>
-      <p>Recurrence Id: {{ task.recurrenceId }}</p>
+      <p class="task-label">Due Date: <span class="task-display">{{ getDateFromJson(task.dueDate) }}</span></p>
+      <p class="task-label">Reminder: <span class="task-display">{{ getDateFromJson(task.reminder) }}</span></p>
+      <p class="task-label">Is Complete?: <span class="task-display">{{ task.isComplete }}</span></p>
+      <p class="task-label">Is Important?: <span class="task-display">{{ task.isImportant }}</span></p>
+      <p class="task-label">Recurrence: <span class="task-display">{{ task.recurrenceName }}</span></p>
+      <p class="task-label">Created Date: <span class="task-display">{{ getDateFromJson(task.createdDate) }}</span></p>
+      <p class="task-label">Folder Name: <span class="task-display">{{ task.folderName }}</span></p>
       <router-link
         tag="button"
         :to="{ name: 'EditTask', params: { taskID: $route.params.taskID } }"
@@ -40,13 +37,9 @@
 
 <script>
 import taskService from "../services/TaskService";
-//import CommentsList from "@/components/CommentsList";
 
 export default {
   name: "task-detail",
-  /* components: {
-    CommentsList
-  }, */
   data() {
     return {
       isLoading: true,
@@ -54,6 +47,9 @@ export default {
     };
   },
   methods: {
+    getDateFromJson(dateValue) {
+      return new Date(dateValue).toDateString();
+    },
     retrieveTask() {
       taskService
         .getTask(this.$route.params.taskID)
@@ -77,9 +73,9 @@ export default {
         )
       ) {
         taskService
-          .deleteTask(this.task.id)
+          .deleteTask(this.task.taskId)
           .then((response) => {
-            if (response.status === 200) {
+            if (response.status === 204) {
               alert("Task successfully deleted");
               this.$router.push(`/folder/${this.task.folderId}`);
             }
@@ -124,5 +120,11 @@ export default {
   background-color: #ef031a;
   border-color: #ef031a;
   margin-bottom: 10px;
+}
+.task-label {
+  font-weight: bold;
+}
+.task-display {
+  color: blue;
 }
 </style>

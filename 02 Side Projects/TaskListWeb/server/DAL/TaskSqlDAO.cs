@@ -36,7 +36,7 @@ namespace TaskListWeb.DAL
                     cmd.Parameters.AddWithValue("@recurrencename", taskToCreate.RecurrenceName);
                     cmd.Parameters.AddWithValue("@iscomplete", (SqlBoolean)taskToCreate.IsComplete);
                     cmd.Parameters.AddWithValue("@isimportant", (SqlBoolean)taskToCreate.IsImportant);
-                    cmd.Parameters.AddWithValue("@folderid", taskToCreate.FolderName);
+                    cmd.Parameters.AddWithValue("@foldername", taskToCreate.FolderName);
                     cmd.ExecuteNonQuery();
 
                     cmd = new SqlCommand("SELECT MAX(task_id) FROM task", conn);

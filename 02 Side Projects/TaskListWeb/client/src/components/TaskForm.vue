@@ -4,33 +4,66 @@
       {{ errorMsg }}
     </div>
     <div class="form-group">
-      <label for="task-name">Task Name:</label>
-      <input
+      <label for="task-name" class="task-label">Task Name:</label>
+      <textarea
         id="task-name"
-        type="text"
+        rows="5"
+        cols="50"
         class="form-control"
         v-model="task.taskName"
         autocomplete="off"
+        required
+        maxlength="255"
       />
-    </div>
-    <!-- <div class="form-group">
-      <label for="tag">Tag:</label>
-      <select id="tag" class="form-control" v-model="card.tag">
-        <option value="Feature Request">Feature Request</option>
-        <option value="Design">Design</option>
-        <option value="Q&A">Q&A</option>
+      <label for="due-date" class="task-label">Due Date:</label>
+      <input
+        id="due-date"
+        type="date"
+        class="form-control"
+        v-model="task.dueDate"
+      />
+      <label for="reminder" class="task-label">Reminder:</label>
+      <input
+        id="reminder"
+        type="date"
+        class="form-control"
+        v-model="task.reminder"
+      />
+      <label for="is-complete" class="task-label">Is Complete?:</label>
+      <input
+        id="is-complete"
+        type="checkbox"
+        class="form-control"
+        v-model="task.isComplete"
+      />
+      <label for="is-important" class="task-label">Is Important?:</label>
+      <input
+        id="is-important"
+        type="checkbox"
+        class="form-control"
+        v-model="task.isImportant"
+      />
+      <label for="recurrence" class="task-label">Recurrence:</label>
+      <select id="recurrence" v-model="task.recurrenceName">
+        <option value="none">none</option>
+        <option value="daily">daily</option>
+        <option value="weekdays">weekdays</option>
+        <option value="weekly">weekly</option>
+        <option value="monthly">monthly</option>
+        <option value="annually">annually</option>
       </select>
-      <label for="status">Status:</label>
-      <select id="tag" class="form-control" v-model="card.status">
-        <option value="Planned">Planned</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
+      <label for="folder-name" class="task-label">Folder Name:</label>
+      <select id="folder-name" v-model="task.folderName">
+        <option
+          v-for="folder in this.$store.state.folders"
+          v-bind:key="folder.folderId"
+          v-bind:value="folder.folderName"
+          v-show="folder.folderId != 2 && folder.folderId != 3"
+        >
+          {{ folder.folderName }}
+        </option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea id="description" class="form-control" v-model="card.description"></textarea>
-    </div> -->
     <button class="btn btn-submit">Submit</button>
     <button
       class="btn btn-cancel"
@@ -44,7 +77,6 @@
 
 <script>
 import taskService from "../services/TaskService";
-//import moment from "moment";
 
 export default {
   name: "task-form",
@@ -59,29 +91,24 @@ export default {
       task: {
         taskId: "",
         taskName: "",
-        dueDate: "",
-        reminder: "",
-        createdDate: "",
+        dueDate: Date,
+        reminder: Date,
         isComplete: "",
         isImportant: "",
         folderName: "",
         recurrenceName: "",
-        folderId: "",
-        recurrenceId: "",
       },
       errorMsg: "",
     };
   },
   methods: {
+    getDateFromJson(dateValue) {
+      return new Date(dateValue).toDateString();
+    },
     submitForm() {
       const newTask = {
         folderId: Number(this.$route.params.folderID),
         taskName: this.card.taskName,
-        /* description: this.card.description,
-        status: this.card.status,
-        tag: this.card.tag,
-        avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
-        date: moment().format("MMM Do YYYY"), */
       };
 
       if (this.taskID === 0) {
@@ -100,8 +127,6 @@ export default {
         // update
         newTask.taskId = this.taskID;
         newTask.taskName = this.taskName;
-        /* newCard.avatar = this.card.avatar;
-        newCard.date = this.card.date; */
         taskService
           .updateTask(newTask)
           .then((response) => {

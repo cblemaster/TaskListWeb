@@ -1,12 +1,12 @@
 <template>
   <div class="folder">
-    <h2>{{ folderName }}</h2>
-    <div class="tasks">
+    <div class="tasks" >
       <div
         class="task"
         v-for="task in tasks"
         v-bind:key="task.taskId"
         v-on:click="viewTaskDetails(task.taskId)"
+        v-bind:class="{complete: task.isComplete === true}"
       >
         <div class="header">
           <h3>{{ task.taskName }}</h3>
@@ -64,8 +64,11 @@ export default {
   align-self: flex-start;
 }
 .task .footer {
- 
   margin: 20px 0 10px 0;
   font-size: 0.75rem;
+}
+div.complete {
+  text-decoration: line-through;
+    color:darkgrey;
 }
 </style>

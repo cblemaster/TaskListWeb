@@ -30,12 +30,12 @@ export default new Vuex.Store({
     },
     SET_CURRENT_TASK(state, data) {
       state.task = data;
-    }/* ,
-    DELETE_BOARD(state, boardIdToDelete) {
-      state.boards = state.boards.filter((board) => {
-        return board.id !== boardIdToDelete;
-      });
-    } */
+    },
+    FILTER_FOR_TASKS_NOT_COMPLETE(state) {
+      state.folderTasks = state.folderTasks.filter((folderTask) => {
+        return folderTask.isComplete === false;
+      })
+    } 
   },
   actions: {
   },

@@ -30,13 +30,9 @@
         <input
           type="text"
           class="form-control"
+          maxlength="50"
+          required
           v-model="newFolder.folderName"
-        />
-        Background Color:
-        <input
-          type="text"
-          class="form-control"
-          v-model="newFolder.backgroundColor"
         />
         <button class="btn btn-submit" v-on:click="saveNewFolder">Save</button>
         <button class="btn btn-cancel" v-on:click="resetAddFolder">
@@ -57,7 +53,6 @@ export default {
       showAddFolder: false,
       newFolder: {
         folderName: "",
-        backgroundColor: this.randomBackgroundColor(),
       },
       errorMsg: "",
     };
@@ -81,54 +76,48 @@ export default {
       });
     },
     saveNewFolder() {
-      alert("begin save new folder");
-      this.isLoading = true; //show the ping pong
-      taskService
-        .addFolder(this.newFolder)
-        .then((response) => {
-          if (response.status === 201) {
-            //refresh the list of all of the folders
-            this.retrieveFolders();
-            //stop showing the form
-            //reset the new folder back to blank
-            this.resetAddFolder();
+      if (this.newFolder.folderName.length === 0) {
+        alert("Folder Name is required.");
+      } else if (this.newFolder.folderName.length > 50) {
+        alert("Max length for Folder Name is 50 characters.");
+      } else {
+        this.isLoading = true; //show the ping pong
+        taskService
+          .addFolder(this.newFolder)
+          .then((response) => {
+            if (response.status === 201) {
+              //refresh the list of all of the folders
+              this.retrieveFolders();
+              //stop showing the form
+              //reset the new folder back to blank
+              this.resetAddFolder();
+              // this.isLoading = false;
+            }
+          })
+          .catch((error) => {
+            if (error.response) {
+              this.errorMsg =
+                "Error creating folder. Response from server was " +
+                error.response.statusText +
+                ".";
+            } else if (error.request) {
+              this.errorMsg = "Error creating folder. Could not reach server.";
+            } else {
+              this.errorMsg =
+                "Error creating new folder. Request could not be created.";
+            }
             // this.isLoading = false;
-          }
-        })
-        .catch((error) => {
-          if (error.response) {
-            this.errorMsg =
-              "Error creating folder. Response from server was " +
-              error.response.statusText +
-              ".";
-          } else if (error.request) {
-            this.errorMsg = "Error creating folder. Could not reach server.";
-          } else {
-            this.errorMsg =
-              "Error creating new folder. Request could not be created.";
-          }
-          // this.isLoading = false;
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
-
-      alert("at the end of save new folder");
+          })
+          .finally(() => {
+            this.isLoading = false;
+          });
+      }
     },
     resetAddFolder() {
       this.newFolder = {
         folderName: "",
-        backgroundColor: this.randomBackgroundColor(),
       };
       this.showAddFolder = false;
-    },
-    randomBackgroundColor() {
-      return "#" + this.generateHexCode();
-    },
-    generateHexCode() {
-      var bg = Math.floor(Math.random() * 16777215).toString(16);
-      if (bg.length !== 6) bg = this.generateHexCode();
-      return bg;
     },
   },
 };
