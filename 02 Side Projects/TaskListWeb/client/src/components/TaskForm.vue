@@ -20,14 +20,14 @@
         id="due-date"
         type="date"
         class="form-control"
-        v-model="task.dueDate"
+        v-model="task.dueDate.toDateString"
       />
       <label for="reminder" class="task-label">Reminder:</label>
       <input
         id="reminder"
         type="date"
         class="form-control"
-        v-model="task.reminder"
+        v-model="task.reminder.toDateString"
       />
       <label for="is-complete" class="task-label">Is Complete?:</label>
       <input
