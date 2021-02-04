@@ -20,14 +20,14 @@
         id="due-date"
         type="date"
         class="form-control"
-        v-model="task.dueDate.toDateString"
+        v-model="task.dueDate"
       />
       <label for="reminder" class="task-label">Reminder:</label>
       <input
         id="reminder"
         type="date"
         class="form-control"
-        v-model="task.reminder.toDateString"
+        v-model="task.reminder"
       />
       <label for="is-complete" class="task-label">Is Complete?:</label>
       <input
@@ -89,14 +89,14 @@ export default {
   data() {
     return {
       task: {
-        taskId: "",
+        //taskId: Number,
         taskName: "",
-        dueDate: Date,
-        reminder: Date,
-        isComplete: "",
-        isImportant: "",
+        dueDate: "",
+        reminder: "",
+        isComplete: false,
+        isImportant: false,
         folderName: "",
-        recurrenceName: "",
+        recurrenceName: ""
       },
       errorMsg: "",
     };
@@ -107,17 +107,24 @@ export default {
     },
     submitForm() {
       const newTask = {
-        folderId: Number(this.$route.params.folderID),
-        taskName: this.card.taskName,
+        //folderId: Number(this.$route.params.folderID),
+        taskName: this.task.taskName,
+        dueDate: this.task.dueDate,
+        reminder: this.task.reminder,
+        isComplete: this.task.isComplete,
+        isImportant: this.task.isImportant,
+        folderName: this.task.folderName,
+        recurrenceName: this.task.recurrenceName
       };
 
       if (this.taskID === 0) {
         // add
+        alert("Start Adding!");
         taskService
           .addTask(newTask)
           .then((response) => {
             if (response.status === 201) {
-              this.$router.push(`/folder/${newTask.folderId}`);
+              this.$router.push(`/folder/${response.data.folderId}`);
             }
           })
           .catch((error) => {
@@ -126,12 +133,18 @@ export default {
       } else {
         // update
         newTask.taskId = this.taskID;
-        newTask.taskName = this.taskName;
+        newTask.taskName = this.task.taskName,
+        newTask.dueDate = this.task.dueDate,
+        newTask.reminder = this.task.reminder,
+        newTask.isComplete = this.task.isComplete,
+        newTask.isImportant = this.task.isImportant,
+        newTask.folderName = this.task.folderName,
+        newTask.recurrenceName = this.task.recurrenceName
         taskService
           .updateTask(newTask)
           .then((response) => {
             if (response.status === 200) {
-              this.$router.push(`/folder/${newTask.folderId}`);
+              this.$router.push(`/folder/${this.$route.params.folderID}`);
             }
           })
           .catch((error) => {

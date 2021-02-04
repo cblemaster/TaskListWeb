@@ -6,7 +6,7 @@
         {{ errorMsg }}
       </div>
       <div class="loading" v-if="isLoading">
-        <img src="../assets/ping_pong_loader.gif" />
+        <img src="../assets/loading-gif.gif" />
       </div>
       <router-link
         :to="{ name: 'Folder', params: { id: folder.folderId } }"
@@ -81,17 +81,17 @@ export default {
       } else if (this.newFolder.folderName.length > 50) {
         alert("Max length for Folder Name is 50 characters.");
       } else {
-        this.isLoading = true; //show the ping pong
+        this.isLoading = true; //show the spinner
         taskService
           .addFolder(this.newFolder)
           .then((response) => {
             if (response.status === 201) {
+              //alert("Wheee!!");
               //refresh the list of all of the folders
               this.retrieveFolders();
               //stop showing the form
               //reset the new folder back to blank
               this.resetAddFolder();
-              // this.isLoading = false;
             }
           })
           .catch((error) => {

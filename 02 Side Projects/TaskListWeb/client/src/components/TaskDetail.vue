@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="loading" v-if="isLoading">
-      <img src="../assets/ping_pong_loader.gif" />
+      <img src="../assets/loading-gif.gif" />
     </div>
     <div v-else>
       <h1>{{ task.taskName }}</h1>

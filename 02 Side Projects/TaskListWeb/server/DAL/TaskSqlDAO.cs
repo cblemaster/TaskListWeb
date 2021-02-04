@@ -28,7 +28,7 @@ namespace TaskListWeb.DAL
                                                     "VALUES (@taskname, @duedate, @reminder, " +
                                                     "GETDATE(), " +
                                                     "(SELECT recurrence_id FROM recurrence WHERE recurrence_name=@recurrencename), @iscomplete, " +
-                                                    "@isimportant, (SELECT folder_id FROM folder WHERE folder_name=@foldername)", conn);
+                                                    "@isimportant, (SELECT folder_id FROM folder WHERE folder_name=@foldername))", conn);
                     
                     cmd.Parameters.AddWithValue("@taskname", taskToCreate.TaskName);
                     cmd.Parameters.AddWithValue("@duedate", (SqlDateTime)taskToCreate.DueDate);

@@ -52,7 +52,7 @@
       </form>
     </div>
     <div class="loading" v-if="isLoading">
-      <img src="../assets/ping_pong_loader.gif" />
+      <img src="../assets/loading-gif.gif" />
     </div>
     <div v-else>
       <div class="status-message error" v-show="errorMsg !== ''">
@@ -170,7 +170,7 @@ export default {
             .then((response) => {
               if (response.status === 204) {
                 alert("Folder successfully deleted.");
-                this.$router.push("/");
+                this.$router.push("/");  //TODO: fix this route - after folder delete refresh the folders list
               }
             })
             .catch((error) => {
