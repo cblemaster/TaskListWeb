@@ -1,0 +1,15 @@
+Front end refinements
+	Task form - needs css
+	Test all folder and task add, change, delete operations - polish up the post-event routing
+	Need functionality for generating new task after a recurring task is marked 'complete'
+	Task count per folder in folder list
+	Data binding for calendar controls on task form
+	Reminders - how does user interact with these? When do they appear? Can they be snoozed? Dismissed?
+
+Features
+	SQL database with db drop and create, table drop and create, and app-required data creation scripted
+	C# object models, data access layer (with interfaces), and API controllers
+	Postman used to test all API endpoints
+	APIs respond to client with JSON objects
+	Vue.js front-end with axios promise-based http requests
+	

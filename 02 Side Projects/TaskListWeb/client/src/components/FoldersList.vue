@@ -86,7 +86,7 @@ export default {
           .addFolder(this.newFolder)
           .then((response) => {
             if (response.status === 201) {
-              //alert("Wheee!!");
+              alert("Wheee!!");
               //refresh the list of all of the folders
               this.retrieveFolders();
               //stop showing the form
